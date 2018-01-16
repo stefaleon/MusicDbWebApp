@@ -135,3 +135,52 @@ public class BandsController : Controller
        </ul>       
     </div>
 ```
+
+&nbsp;
+## 04 BandViewModel, SelectBand
+
+* Create the *ViewModels* folder and the *BandViewModel* class.
+
+```
+namespace MusicDbMVCWebApp.ViewModels
+{
+    public class BandViewModel
+    {
+        public Band mBand { get; set; }
+
+        public List<Person> mMembers { get; set; }
+    }
+}
+```
+
+
+* In *BandsController*
+
+```
+    // GET: Bands/42
+    public ActionResult SelectBand(int? id)
+    {
+
+        if (id == null)
+        {
+            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        }
+
+        Band selectedBand = db.Bands.Find(id);
+
+        if (selectedBand == null)
+        {
+            return HttpNotFound();
+        }
+
+        var members = selectedBand.People.ToList();
+
+        var viewModel = new BandViewModel
+        {
+            mBand = selectedBand,
+            mMembers = members                
+        };
+
+        return View("Bands", viewModel);
+    }
+```

@@ -1,6 +1,8 @@
-﻿using System;
+﻿using MusicDbMVCWebApp.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
@@ -17,5 +19,35 @@ namespace MusicDbMVCWebApp.Controllers
 
             return View("Bands", bands);
         }
+
+        // GET: Bands/42
+        public ActionResult SelectBand(int? id)
+        {
+
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            Band selectedBand = db.Bands.Find(id);
+
+            if (selectedBand == null)
+            {
+                return HttpNotFound();
+            }
+
+            var members = selectedBand.People.ToList();
+
+            var viewModel = new BandViewModel
+            {
+                mBand = selectedBand,
+                mMembers = members                
+            };
+
+            return View("Bands", viewModel);
+        }
+
+
+
     }
 }
