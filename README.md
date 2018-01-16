@@ -63,3 +63,75 @@
     <h1>Music Database Web Application</h1>    
 </div>
 ```
+
+
+
+
+
+&nbsp;
+## 03 Bands controller and view
+
+* Right click on Controllers, add Controller.
+* Empty MVC5 Controller -> BandsController
+
+*Controllers/BandsController.cs*
+```
+using System.Data.Entity;
+```
+```
+public class BandsController : Controller
+{
+    private MusicDbEntities db = new MusicDbEntities();
+
+    // GET: Bands
+    public ActionResult Index()
+    {
+        var bands = db.Bands.ToList();
+
+        return View("Bands", bands);
+    }
+}
+```
+
+
+* In */Views/Bands* add a new view *Bands*.
+
+*/Views/Bands/Bands.cshtml*
+```
+@model IEnumerable<MusicDbMVCWebApp.Band>
+
+@{
+    ViewBag.Title = "Bands";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Bands</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            Band
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name )
+            </td>
+        </tr>
+    }
+</table>
+```
+
+* Add a link on the navigation bar
+
+*Views/Shared/_Layout.cshtml*
+```
+    <div class="navbar-collapse collapse">
+       <ul class="nav navbar-nav">
+           <li>@Html.ActionLink("Bands", "Index", "Bands")</li>
+       </ul>       
+    </div>
+```

@@ -153,6 +153,7 @@
     <Compile Include="Band.cs">
       <DependentUpon>MusicDbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\BandsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="C__MigrationHistory.cs">
       <DependentUpon>MusicDbModel.tt</DependentUpon>
@@ -236,6 +237,7 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Bands\Bands.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
