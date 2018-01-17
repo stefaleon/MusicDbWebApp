@@ -157,7 +157,7 @@ namespace MusicDbMVCWebApp.ViewModels
 * In *BandsController*
 
 ```
-    // GET: Bands/42
+    // GET: Bands/SelectBand/42
     public ActionResult SelectBand(int? id)
     {
 
@@ -166,7 +166,7 @@ namespace MusicDbMVCWebApp.ViewModels
             return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
         }
 
-        Band selectedBand = db.Bands.Find(id);
+        var selectedBand = db.Bands.Find(id);
 
         if (selectedBand == null)
         {
@@ -181,6 +181,35 @@ namespace MusicDbMVCWebApp.ViewModels
             mMembers = members                
         };
 
-        return View("Bands", viewModel);
+        return View("Band", viewModel);
     }
+```
+
+* Create the *Band* view.
+
+*Views/Bands/Band*
+```
+@model MusicDbMVCWebApp.ViewModels.BandViewModel
+
+@{
+    ViewBag.Title = "Band";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>@Model.mBand.Name</h3>
+
+@foreach (var m in Model.mMembers)
+{
+    <li>@m.Name</li>
+}
+```
+
+* Edit the *tr* tag in the bands' list view.
+
+*Views/Bands/Bands*
+```
+//...
+<tr style="cursor:pointer;"
+            onclick="location.href =
+            '@(Url.Action("SelectBand", "Bands", new { id = item.Id }))'">
 ```

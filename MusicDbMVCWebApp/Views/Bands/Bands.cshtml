@@ -17,7 +17,9 @@
     </tr>
     @foreach (var item in Model)
     {
-        <tr>
+        <tr style="cursor:pointer;"
+            onclick="location.href =
+            '@(Url.Action("SelectBand", "Bands", new { id = item.Id }))'">
             <td>
                 @Html.DisplayFor(modelItem => item.Name )
             </td>

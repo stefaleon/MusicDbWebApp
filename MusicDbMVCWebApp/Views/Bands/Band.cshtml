@@ -1,9 +1,14 @@
-﻿@model MusicDbMVCWebApp.Band
+﻿@model MusicDbMVCWebApp.ViewModels.BandViewModel
 
 @{
     ViewBag.Title = "Band";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<h3>@Model.mBand.Name</h3>
 
+@foreach (var m in Model.mMembers)
+{
+    <li>@m.Name</li>
+}
                 

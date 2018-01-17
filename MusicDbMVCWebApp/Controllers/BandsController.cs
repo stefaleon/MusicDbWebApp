@@ -20,7 +20,7 @@ namespace MusicDbMVCWebApp.Controllers
             return View("Bands", bands);
         }
 
-        // GET: Bands/42
+        // GET: Bands/SelectBand/42
         public ActionResult SelectBand(int? id)
         {
 
@@ -29,7 +29,7 @@ namespace MusicDbMVCWebApp.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            Band selectedBand = db.Bands.Find(id);
+            var selectedBand = db.Bands.Find(id);
 
             if (selectedBand == null)
             {
@@ -44,7 +44,7 @@ namespace MusicDbMVCWebApp.Controllers
                 mMembers = members                
             };
 
-            return View("Bands", viewModel);
+            return View("Band", viewModel);
         }
 
 
