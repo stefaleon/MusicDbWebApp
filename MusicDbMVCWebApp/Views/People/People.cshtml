@@ -1,0 +1,27 @@
+﻿@model IEnumerable<MusicDbMVCWebApp.Person>
+
+@{
+    ViewBag.Title = "People";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>People</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            Person
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr style="cursor:pointer;"
+            onclick="location.href =
+            '@(Url.Action("SelectPerson", "People", new { id = item.Id }))'">
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+        </tr>
+    }
+</table>
